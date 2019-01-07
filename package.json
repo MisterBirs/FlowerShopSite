@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/shlomfix/FlowerShopSite#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9"
   }
 }
