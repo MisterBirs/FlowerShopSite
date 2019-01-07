@@ -16,7 +16,6 @@ app.get("/", (req, res) => {
 app.post("/users", (req, res) => {
   const password = req.body.password;
   const username = req.body.username;
-  console.log("hiiiiii");
   if (username in users && users[username].password === password) {
     res.send().status(200);
   } else {
