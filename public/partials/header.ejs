@@ -1,5 +1,5 @@
 <!-- views/partials/header.ejs -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <div class="container">
   <img src="../flower_logo.jpg" alt="logo" style="width:120px; height:120px" />
   <button
@@ -21,7 +21,7 @@
           <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form">
+          <form role="form" id="loginForm">
             <div class="form-group">
               <label for="usrname"
                 ><span class="glyphicon glyphicon-user"></span> Username</label
@@ -30,7 +30,7 @@
                 type="text"
                 class="form-control"
                 id="usrname"
-                placeholder="Enter email"
+                placeholder="Enter username"
               />
             </div>
             <div class="form-group">
@@ -39,18 +39,16 @@
                 Password</label
               >
               <input
-                type="text"
+                type="password"
                 class="form-control"
                 id="psw"
                 placeholder="Enter password"
               />
             </div>
             <div class="checkbox">
-              <label
-                ><input type="checkbox" value="" checked />Remember me</label
-              >
+              <label>
             </div>
-            <button type="submit" class="btn btn-success btn-block">
+            <button id="loginSubmit" data-dismiss="modal" type="button" class="btn btn-success btn-block">
               <span class="glyphicon glyphicon-off"></span> Login
             </button>
           </form>
@@ -58,38 +56,61 @@
         <div class="modal-footer">
           <button
             type="submit"
-            class="btn btn-danger btn-default pull-left"
+            class="btn btn-danger btn-default pull-right"
             data-dismiss="modal"
           >
             <span class="glyphicon glyphicon-remove"></span> Cancel
           </button>
-          <p>Not a member? <a href="#">Sign Up</a></p>
-          <p>Forgot <a href="#">Password?</a></p>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    $(document).ready(function() {
-      $("#loginBtn").click(function() {
+    $(document).ready(() => {
+      $("#loginBtn").click(()=> {
         $("#myModal").modal();
       });
-    });
+      $('#loginSubmit').click(()=>{
+      const url='./users';
+      const jsonData={username:$('#usrname').val(),password:$('#psw').val()};
+      const fetchData = {method: 'POST', 
+    body:JSON.stringify(jsonData) ,
+    headers:  { "Content-Type": "application/json" }}
+      fetch(url,fetchData).then(resp=>{console.log(resp.text())});
+    })});
+  </script>
+  <script>
+    
   </script>
 </div>
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
-        Welcome to the people page!
-      </a>
-
-      <ul class="nav navbar-nav">
-        <li><a href="/targil3">Home</a></li>
-        <li><a href="/targil3/5/about">About</a></li>
-      </ul>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+          >Disabled</a
+        >
+      </li>
+    </ul>
   </div>
 </nav>
