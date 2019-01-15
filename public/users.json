@@ -1,1 +1,13 @@
-{ "aaa": { "password": "aaa" } }
+{
+     "shlomi": { "Password": "123456", "position": "worker", "numberBranch": 1 }, 
+     "matanya": { "Password": "121212", "position": "manager"},
+     "fchimaTheNinja": { "Password": "00xx00", "position": "supplier"},
+     "idoOne": { "Password": "TheKurdimRule1", "position": "customer"},
+     "idoTwo": { "Password": "TheKurdimRule1", "position": "customer"},
+     "Nachum": { "Password": "iLoveMoney", "position": "worker", "numberBranch": 2},     
+     "yohanan": { "Password": "abcdef", "position": "worker", "numberBranch": 1},
+     "yoni": { "Password": "a1b2c3", "position": "worker", "numberBranch": 2},
+     "spiderman": { "Password": "101010", "position": "customer"},
+     "superman": { "Password": "654321", "position": "customer"}
+ }
+
