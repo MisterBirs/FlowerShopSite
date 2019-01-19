@@ -6,6 +6,69 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/1/1a/WhiteGazania.JPG",
       "color": "White",
       "active": "true"
+    },
+    {
+      "name": "cyclamen",
+      "price": "40",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Wild_cyclamens.jpg/440px-Wild_cyclamens.jpg",
+      "color": "pink",
+      "active": "true"
+    },
+    {
+      "name": "rose",
+      "price": "50",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Rosa_rubiginosa_1.jpg/440px-Rosa_rubiginosa_1.jpg",
+      "color": "red",
+      "active": "true"
+    },
+    {
+      "name": "sunflower",
+      "price": "70",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/440px-Sunflower_sky_backdrop.jpg",
+      "color": "yellow",
+      "active": "true"
+    },
+    {
+      "name": "tulips",
+      "price": "39",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/%D7%A6%D7%91%D7%A2%D7%95%D7%A0%D7%99%D7%9D.JPG/440px-%D7%A6%D7%91%D7%A2%D7%95%D7%A0%D7%99%D7%9D.JPG",
+      "color": "red",
+      "active": "true"
+    },
+    {
+      "name": "gillardia",
+      "price": "47",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gaillardia_in_Aspen_%2891273%29.jpg/440px-Gaillardia_in_Aspen_%2891273%29.jpg",
+      "color": "red",
+      "active": "true"
+    },
+    {
+      "name": "lilac",
+      "price": "47",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gaillardia_in_Aspen_%2891273%29.jpg/440px-Gaillardia_in_Aspen_%2891273%29.jpg",
+      "color": "purple",
+      "active": "true"
+    },
+    {
+      "name": "White lily",
+      "price": "80",
+      "image": "https://bloomd.com.au/wp-content/uploads/2018/08/White-Lily-Stems.jpg",
+      "color": "white",
+      "active": "true"
+    },
+    {
+      "name": "calla",
+      "price": "90",
+      "image": "https://bloomd.com.au/wp-content/uploads/2018/08/White-Lily-Stems.jpg",
+      "color": "white",
+      "active": "true"
+    },
+    {
+      "name": "chrysanthemum",
+      "price": "10",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Chrysanthemum_November_2007_Osaka_Japan.jpg/440px-Chrysanthemum_November_2007_Osaka_Japan.jpg",
+      "color": "yellow",
+      "active": "true"
     }
   ]
 }
