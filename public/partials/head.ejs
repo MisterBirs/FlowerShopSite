@@ -25,7 +25,48 @@
 ></script>
 
 <style>
-  body {
-    padding-top: 50px;
-  }
 </style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="../flower_logo.jpg" alt="logo" style="width:50px; height:50px" />
+    <a class="navbar-brand" href="#">Flower4U</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="homeNavbar">
+      <ul class="navbar-nav" id="navbarBtn">
+        <li id="about" class="nav-item active"><a class="nav-link" href="#">About us</a></li>
+        <li id="contact" class="nav-item active"><a class="nav-link" href="#">Contact us</a></li>
+        <li id="catalog" class="nav-item active" ><a class="nav-link" href="#">Catalog</a></li>
+        <li id="manage"  class="nav-item active"><a class="nav-link" href="#">Users</a></li>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" id="btnList">
+        <li id="usernameLabel" class="nav-text m-2"></li>
+        <li class="nav-btn"><button
+          id="loginBtn"
+          class="btn btn-primary"
+        >
+          Login
+        </button> </li>
+        <li class="nav-btn"><button
+          id="logoutBtn"
+          class="btn btn-danger"
+        >
+          Logout
+        </button> </li>
+      </ul>
+</nav>
+<script>
+$('#logoutBtn').hide();
+$('#catalog').hide();
+$('#manage').hide();
+</script>

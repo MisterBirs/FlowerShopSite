@@ -4,6 +4,7 @@ var express = require("express");
 var ejs = require("ejs");
 var app = express();
 let users = require("./public/users.json");
+let manage = require("./public/partials/manage");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
@@ -13,14 +14,38 @@ app.get("/", (req, res) => {
   res.render("../public/index.ejs");
 });
 
-app.post("/users", (req, res) => {
-  const password = req.body.password;
-  const username = req.body.username;
-  if (username in users && users[username].password === password) {
-    res.send().status(200);
+app.post("/auth", (req, res) => {
+  const { username, password } = req.body;
+  if (users[username] && users[username].password === password) {
+    res.send();
   } else {
     res.status(500).send("Authentication Error");
   }
+});
+
+app.post("/auth/:username", (req, res) => {
+  const { username } = req.params;
+  console.log(username);
+  if (username in users) {
+    res.json(["matanya", "glik", 123, 5678]);
+    // res.send(users[username]);
+  }
+});
+
+app.get("/manage/:username", (req, res) => {
+  const { username } = req.params;
+  console.log(username);
+  res.send("HI");
+});
+
+app.get("/auth/:username", (req, res) => {
+  const { username } = req.params;
+  //console.log(username);
+  res.json(users[username]);
+});
+
+app.get("/logout/", (req, res) => {
+  res.send();
 });
 
 app.listen(3000, function() {

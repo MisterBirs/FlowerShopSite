@@ -1,13 +1,66 @@
 {
-     "shlomi": { "Password": "123456", "position": "worker", "numberBranch": 1 }, 
-     "matanya": { "Password": "121212", "position": "manager"},
-     "fchimaTheNinja": { "Password": "00xx00", "position": "supplier"},
-     "idoOne": { "Password": "TheKurdimRule1", "position": "customer"},
-     "idoTwo": { "Password": "TheKurdimRule1", "position": "customer"},
-     "Nachum": { "Password": "iLoveMoney", "position": "worker", "numberBranch": 2},     
-     "yohanan": { "Password": "abcdef", "position": "worker", "numberBranch": 1},
-     "yoni": { "Password": "a1b2c3", "position": "worker", "numberBranch": 2},
-     "spiderman": { "Password": "101010", "position": "customer"},
-     "superman": { "Password": "654321", "position": "customer"}
- }
-
+  "shlomi": {
+    "name": "shlomi",
+    "id": 2,
+    "password": "123456",
+    "position": "worker",
+    "numberBranch": 1
+  },
+  "matanya": {
+    "name": "matanya",
+    "password": "1",
+    "position": "manager",
+    "id": 1
+  },
+  "fchimaTheNinja": {
+    "name": "fchimaTheNinja",
+    "id": 3,
+    "password": "00xx00",
+    "position": "supplier"
+  },
+  "idoOne": {
+    "name": "idoOne",
+    "id": 4,
+    "password": "TheKurdimRule1",
+    "position": "customer"
+  },
+  "idoTwo": {
+    "name": "idoTwo",
+    "id": 5,
+    "password": "TheKurdimRule1",
+    "position": "customer"
+  },
+  "Nachum": {
+    "name": "Nachum",
+    "id": 6,
+    "password": "iLoveMoney",
+    "position": "worker",
+    "numberBranch": 2
+  },
+  "yohanan": {
+    "name": "yohanan",
+    "id": 7,
+    "password": "abcdef",
+    "position": "worker",
+    "numberBranch": 1
+  },
+  "yoni": {
+    "name": "yoni",
+    "id": 8,
+    "password": "a1b2c3",
+    "position": "worker",
+    "numberBranch": 2
+  },
+  "spiderman": {
+    "name": "spiderman",
+    "id": 9,
+    "password": "101010",
+    "position": "customer"
+  },
+  "superman": {
+    "name": "superman",
+    "id": 10,
+    "password": "654321",
+    "position": "customer"
+  }
+}

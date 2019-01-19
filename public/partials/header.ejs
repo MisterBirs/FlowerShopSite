@@ -1,14 +1,7 @@
 <!-- views/partials/header.ejs -->
 
 <div class="container">
-  <img src="../flower_logo.jpg" alt="logo" style="width:120px; height:120px" />
-  <button
-    id="loginBtn"
-    style="float:right;align-content: center"
-    class="btn btn-primary"
-  >
-    Login
-  </button>
+  
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -72,45 +65,58 @@
         $("#myModal").modal();
       });
       $('#loginSubmit').click(()=>{
-      const url='./users';
+      const url='./auth';
       const jsonData={username:$('#usrname').val(),password:$('#psw').val()};
       const fetchData = {method: 'POST', 
-    body:JSON.stringify(jsonData) ,
-    headers:  { "Content-Type": "application/json" }}
-      fetch(url,fetchData).then(resp=>{console.log(resp.text())});
-    })});
+        body:JSON.stringify(jsonData) ,
+        headers:  { "Content-Type": "application/json" }}
+      fetch(url,fetchData).then(resp=>{
+        if (resp.status=200) {
+          changeViewAfterLogin(jsonData.username);
+          };
+        });
+    })
+    $('#logoutBtn').click(()=>{
+        const url=`./logout/`;
+      const fetchData = {method: 'post',
+        headers:  { "Content-Type": "application/json" }}
+      fetch(url).then((res)=>{
+        if (res.status==200) {
+        changeViewAfterLogout();
+      }
+    })})
+  });
   </script>
   <script>
-    
+
+    function changeViewAfterLogout() {
+      $('#usernameLabel').text(``);
+      $('#logoutBtn').hide();
+      $('#catalog').hide();
+      $('#manage').hide();
+      $('#loginBtn').show();      
+    }
+    function changeViewAfterLogin(username){
+      const url=`./auth/${username}`;
+      const fetchData = {method: 'GET', 
+        headers:  { "Content-Type": "application/json" }}
+      fetch(url).then(resp=>{
+        resp.json().then(user=>{
+      $('#loginBtn').hide();
+      $('#logoutBtn').show();
+      $('#usernameLabel').text(`Welcome: ${user.name}!`);
+      if(user.position==='manager'||user.position==='worker'){
+        $('#manage').show();
+        $('#catalog').show();
+        $('#body').load('./manage.ejs');
+      }
+      if(user.position==='customer'){
+        $('#catalog').show();
+      }})
+        });
+      }
   </script>
+  
 </div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#"
-          >Home <span class="sr-only">(current)</span></a
-        >
-      </li>
-      <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-          >Disabled</a
-        >
-      </li>
-    </ul>
-  </div>
-</nav>
+
+
