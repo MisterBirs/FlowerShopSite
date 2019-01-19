@@ -7,6 +7,12 @@ let users = require("./public/users.json");
 let manage = require("./public/partials/manage");
 let catalogData = require("./public/flower.json");
 
+function filterData(jsonList) {
+  return jsonList.filter(element => {
+    return element.active == "true";
+  });
+}
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
@@ -54,8 +60,9 @@ app.get("/catalog", (req, res) => {
   const { username } = req.query;
   console.log(username);
   if (users[username]) {
-    console.log(catalogData.flowers);
-    res.render("../public/partials/catalog", { flowers: catalogData.flowers });
+    res.render("../public/partials/catalog", {
+      flowers: filterData(catalogData.flowers)
+    });
   }
 });
 

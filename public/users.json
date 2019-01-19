@@ -4,63 +4,73 @@
     "id": 2,
     "password": "123456",
     "position": "worker",
-    "numberBranch": 1
+    "numberBranch": 1,
+    "active": "true"
   },
   "matanya": {
     "name": "matanya",
     "password": "1",
     "position": "manager",
-    "id": 1
+    "id": 1,
+    "active": "true"
   },
   "fchimaTheNinja": {
     "name": "fchimaTheNinja",
     "id": 3,
     "password": "00xx00",
-    "position": "supplier"
+    "position": "supplier",
+    "active": "true"
   },
   "idoOne": {
     "name": "idoOne",
     "id": 4,
     "password": "TheKurdimRule1",
-    "position": "customer"
+    "position": "customer",
+    "active": "true"
   },
   "idoTwo": {
     "name": "idoTwo",
     "id": 5,
     "password": "TheKurdimRule1",
-    "position": "customer"
+    "position": "customer",
+    "active": "true"
   },
   "Nachum": {
     "name": "Nachum",
     "id": 6,
     "password": "iLoveMoney",
     "position": "worker",
-    "numberBranch": 2
+    "numberBranch": 2,
+    "active": "true"
   },
   "yohanan": {
     "name": "yohanan",
     "id": 7,
     "password": "abcdef",
     "position": "worker",
-    "numberBranch": 1
+    "numberBranch": 1,
+    "active": "true"
   },
   "yoni": {
     "name": "yoni",
     "id": 8,
     "password": "a1b2c3",
     "position": "worker",
-    "numberBranch": 2
+    "numberBranch": 2,
+    "active": "true"
   },
   "spiderman": {
     "name": "spiderman",
     "id": 9,
     "password": "101010",
-    "position": "customer"
+    "position": "customer",
+    "active": "true"
   },
   "superman": {
     "name": "superman",
     "id": 10,
     "password": "654321",
-    "position": "customer"
+    "position": "customer",
+    "active": "true"
   }
 }
