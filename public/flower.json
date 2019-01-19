@@ -1,8 +1,8 @@
 {
-  "flower_name": {
-    "name": "flower_name",
-    "price": "flower_price",
-    "image": "link_to_image",
-    "color": "flower_color"
+  "African Daisy": {
+    "name": "African Daisy",
+    "price": "35",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1a/WhiteGazania.JPG",
+    "color": "White"
   }
 }
