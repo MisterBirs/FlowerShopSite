@@ -1,0 +1,8 @@
+{
+  "flower_name": {
+    "name": "flower_name",
+    "price": "flower_price",
+    "image": "link_to_image",
+    "color": "flower_color"
+  }
+}
