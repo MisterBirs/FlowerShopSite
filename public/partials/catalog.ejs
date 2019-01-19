@@ -1,0 +1,25 @@
+<div class="jumbotron">
+  <h1>Flowers catalog</h1>
+  <div class="row">
+    <%  flowers.forEach(function(flower){ %>
+    <% console.log(flower.name)%>
+    <div class="col-md-2">
+      <div class="card" style="width:200px">
+        <img class="card-img-top" src=<%=flower.image%> alt=
+        <%=flower.image%>
+        style="width:100%"></img>
+        <div class="card-body">
+          <h4 class="card-title">
+            <%=flower.name%>
+          </h4>
+          <p class="card-text">
+            <%="Color: "+flower.color%><br />
+            <%="Price: "+flower.price+"$"%>
+          </p>
+        </div>
+        <!--<br>-->
+      </div>
+      <% })%>
+    </div>
+
+  </div>

@@ -5,6 +5,7 @@ var ejs = require("ejs");
 var app = express();
 let users = require("./public/users.json");
 let manage = require("./public/partials/manage");
+let catalogData = require("./public/flower.json");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
@@ -34,8 +35,9 @@ app.post("/auth/:username", (req, res) => {
 
 app.get("/manage/:username", (req, res) => {
   const { username } = req.params;
-  console.log(username);
-  res.send("HI");
+  if (users[username] && users[username].position === "manager") {
+    res.render("../public/partials/manage");
+  }
 });
 
 app.get("/auth/:username", (req, res) => {
@@ -46,6 +48,15 @@ app.get("/auth/:username", (req, res) => {
 
 app.get("/logout/", (req, res) => {
   res.send();
+});
+
+app.get("/catalog", (req, res) => {
+  const { username } = req.query;
+  console.log(username);
+  if (users[username]) {
+    console.log(catalogData.flowers);
+    res.render("../public/partials/catalog", { flowers: catalogData.flowers });
+  }
 });
 
 app.listen(3000, function() {

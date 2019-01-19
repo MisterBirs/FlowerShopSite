@@ -1,7 +1,7 @@
 <!-- views/partials/header.ejs -->
 
 <div class="container">
-  
+
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -16,27 +16,13 @@
         <div class="modal-body" style="padding:40px 50px;">
           <form role="form" id="loginForm">
             <div class="form-group">
-              <label for="usrname"
-                ><span class="glyphicon glyphicon-user"></span> Username</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="usrname"
-                placeholder="Enter username"
-              />
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="text" class="form-control" id="usrname" placeholder="Enter username" />
             </div>
             <div class="form-group">
-              <label for="psw"
-                ><span class="glyphicon glyphicon-eye-open"></span>
-                Password</label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="psw"
-                placeholder="Enter password"
-              />
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span>
+                Password</label>
+              <input type="password" class="form-control" id="psw" placeholder="Enter password" />
             </div>
             <div class="checkbox">
               <label>
@@ -47,11 +33,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button
-            type="submit"
-            class="btn btn-danger btn-default pull-right"
-            data-dismiss="modal"
-          >
+          <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">
             <span class="glyphicon glyphicon-remove"></span> Cancel
           </button>
         </div>
@@ -60,63 +42,83 @@
   </div>
 
   <script>
+    let this_username = '';
     $(document).ready(() => {
-      $("#loginBtn").click(()=> {
+      $("#loginBtn").click(() => {
         $("#myModal").modal();
       });
-      $('#loginSubmit').click(()=>{
-      const url='./auth';
-      const jsonData={username:$('#usrname').val(),password:$('#psw').val()};
-      const fetchData = {method: 'POST', 
-        body:JSON.stringify(jsonData) ,
-        headers:  { "Content-Type": "application/json" }}
-      fetch(url,fetchData).then(resp=>{
-        if (resp.status=200) {
-          changeViewAfterLogin(jsonData.username);
+      $('#loginSubmit').click(() => {
+        const url = './auth';
+        const jsonData = {
+          username: $('#usrname').val(),
+          password: $('#psw').val()
+        };
+        const fetchData = {
+          method: 'POST',
+          body: JSON.stringify(jsonData),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+        fetch(url, fetchData).then(resp => {
+          if (resp.status = 200) {
+            this_username = jsonData.username;
+            changeViewAfterLogin(this_username);
           };
         });
-    })
-    $('#logoutBtn').click(()=>{
-        const url=`./logout/`;
-      const fetchData = {method: 'post',
-        headers:  { "Content-Type": "application/json" }}
-      fetch(url).then((res)=>{
-        if (res.status==200) {
-        changeViewAfterLogout();
-      }
-    })})
-  });
+      })
+      $('#logoutBtn').click(() => {
+        const url = `./logout/`;
+        const fetchData = {
+          method: 'post',
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+        fetch(url).then((res) => {
+          if (res.status == 200) {
+            changeViewAfterLogout();
+          }
+        })
+      });
+      $('#catalog').click(() => {
+        console.log('catalog clicked');
+        $('#body').load(`./catalog?username=${this_username}`);
+      });
+    });
   </script>
   <script>
-
     function changeViewAfterLogout() {
       $('#usernameLabel').text(``);
       $('#logoutBtn').hide();
       $('#catalog').hide();
       $('#manage').hide();
-      $('#loginBtn').show();      
+      $('#loginBtn').show();
     }
-    function changeViewAfterLogin(username){
-      const url=`./auth/${username}`;
-      const fetchData = {method: 'GET', 
-        headers:  { "Content-Type": "application/json" }}
-      fetch(url).then(resp=>{
-        resp.json().then(user=>{
-      $('#loginBtn').hide();
-      $('#logoutBtn').show();
-      $('#usernameLabel').text(`Welcome: ${user.name}!`);
-      if(user.position==='manager'||user.position==='worker'){
-        $('#manage').show();
-        $('#catalog').show();
-        $('#body').load('./manage.ejs');
+
+    function changeViewAfterLogin(username) {
+      const url = `./auth/${username}`;
+      const fetchData = {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-      if(user.position==='customer'){
-        $('#catalog').show();
-      }})
-        });
-      }
+      fetch(url).then(resp => {
+        resp.json().then(user => {
+          $('#loginBtn').hide();
+          $('#logoutBtn').show();
+          $('#usernameLabel').text(`Welcome: ${user.name}!`);
+          if (user.position === 'manager' || user.position === 'worker') {
+            $('#manage').show();
+            $('#catalog').show();
+          }
+          if (user.position === 'customer') {
+            $('#catalog').show();
+          }
+        })
+      });
+    }
   </script>
-  
+
 </div>
-
-
