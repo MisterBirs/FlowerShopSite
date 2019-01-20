@@ -1,0 +1,46 @@
+<form>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" value="<%=user.name%>" aria-describedby="emailHelp"
+            placeholder="<%=user.name%>">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" value="<%=user.password%>" placeholder="Password"
+            placeholder="<%=user.password%>">
+    </div>
+    <div class="form-group">
+        <label for="userID">ID</label>
+        <input type="text" readonly class="form-control" id="userID" value="<%=user.id%>" aria-describedby="emailHelp"
+            placeholder="<%=user.id%>">
+    </div>
+    <div class="form-group">
+        <label for="branchNumber">Branch #</label>
+        <input type="text" class="form-control" id="branchNumber" value="<%=user.numberBranch%>" aria-describedby="emailHelp"
+            placeholder="<%=user.numberBranch%>">
+    </div>
+    <div class="form-group">
+        <label for="role">Role</label>
+        <input type="text" class="form-control" id="role" value="<%=user.position%>" aria-describedby="emailHelp"
+            placeholder="<%=user.position%>">
+    </div>
+    <button type="button" onclick="update('<%user.name%>')" class="btn btn-primary">Update</button>
+</form>
+<script>
+    function update(username) {
+        username = $('#username').val();
+        password = $('#password').val();
+        role = $('#role').val();
+        branchNumber = $('#branchNumber').val();
+        fetch(
+            `/mUpdate?username=${this_username}&userToUpdate=<%=user.name%>&newUsername=${username}&newPassword=${password}&newPosition=${role}&newBranch=${branchNumber}`, {
+                method: 'PUT'
+            }).then((res) => {
+            res.json().then(json => {
+                alert(json);
+            })
+
+        })
+        $('#body').load(`./users?username=${this_username}`);
+    }
+</script>

@@ -1,72 +1,49 @@
 <!-- views/partials/head.ejs -->
-<meta charset="UTF-8" /> <title>Super Awesome</title>
+<meta charset="UTF-8" />
+<title>Super Awesome</title>
 
 <!-- CSS (load bootstrap from a CDN) -->
-<link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-  crossorigin="anonymous"
-/>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"
-></script>
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-  integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-  crossorigin="anonymous"
-></script>
-<script
-  src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-  integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-  crossorigin="anonymous"
-></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+  crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+  crossorigin="anonymous"></script>
 
 <style>
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <img src="../flower_logo.jpg" alt="logo" style="width:50px; height:50px" />
-    <a class="navbar-brand" href="#">Flower4U</a>
+  <img src="../flower_logo.jpg" alt="logo" style="width:50px; height:50px" />
+  <a class="navbar-brand" href="#">Flower4U</a>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="homeNavbar">
-      <ul class="navbar-nav" id="navbarBtn">
-        <li id="about" class="nav-item active"><a class="nav-link" href="#">About us</a></li>
-        <li id="contact" class="nav-item active"><a class="nav-link" href="#">Contact us</a></li>
-        <li id="catalog" class="nav-item active" ><a class="nav-link" href="#">Catalog</a></li>
-        <li id="manage"  class="nav-item active"><a class="nav-link" href="#">Users</a></li>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto" id="btnList">
-        <li id="usernameLabel" class="nav-text m-2"></li>
-        <li class="nav-btn"><button
-          id="loginBtn"
-          class="btn btn-primary"
-        >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="homeNavbar">
+    <ul class="navbar-nav" id="navbarBtn">
+      <li id="about" class="nav-item active"><a class="nav-link" href="#">About us</a></li>
+      <li id="catalog" class="nav-item active"><a class="nav-link" href="#">Catalog</a></li>
+      <li id="branches" class="nav-item active"><a class="nav-link" href="#">Branches management</a></li>
+      <li id="users" class="nav-item active"><a class="nav-link" href="#">Users management</a></li>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" id="btnList">
+      <li id="usernameLabel" class="nav-text m-2"></li>
+      <li id="contact" class="nav-item active"><a class="nav-link" href="#">Contact us</a></li>
+      <li class="nav-btn"><button id="loginBtn" class="btn btn-primary">
           Login
         </button> </li>
-        <li class="nav-btn"><button
-          id="logoutBtn"
-          class="btn btn-danger"
-        >
+      <li class="nav-btn"><button id="logoutBtn" class="btn btn-danger">
           Logout
         </button> </li>
-      </ul>
+    </ul>
 </nav>
 <script>
-$('#logoutBtn').hide();
-$('#catalog').hide();
-$('#manage').hide();
+  $('#logoutBtn').hide();
+  $('#catalog').hide();
+  $('#branches').hide();
+  $('#users').hide();
 </script>

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/shlomfix/FlowerShopSite#readme",
   "dependencies": {
     "ejs": "^2.6.1",
+    "ejs-lint": "^0.3.0",
     "express": "^4.16.4",
     "nodemon": "^1.18.9"
   }

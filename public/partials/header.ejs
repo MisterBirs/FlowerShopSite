@@ -85,6 +85,9 @@
         console.log('catalog clicked');
         $('#body').load(`./catalog?username=${this_username}`);
       });
+      $('#users').click(() => {
+        $('#body').load(`./users?username=${this_username}`);
+      })
     });
   </script>
   <script>
@@ -92,7 +95,8 @@
       $('#usernameLabel').text(``);
       $('#logoutBtn').hide();
       $('#catalog').hide();
-      $('#manage').hide();
+      $('#users').hide();
+      $('#branches').hide();
       $('#loginBtn').show();
     }
 
@@ -110,8 +114,10 @@
           $('#logoutBtn').show();
           $('#usernameLabel').text(`Welcome: ${user.name}!`);
           if (user.position === 'manager' || user.position === 'worker') {
-            $('#manage').show();
+            $('#users').show();
             $('#catalog').show();
+            if (user.position === 'manager')
+              $('#branches').show();
           }
           if (user.position === 'customer') {
             $('#catalog').show();
