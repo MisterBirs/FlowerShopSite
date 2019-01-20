@@ -1,50 +1,64 @@
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Username</th>
-      <th scope="col">Password</th>
-      <th scope="col">Role</th>
-      <th scope="col">branch</th>
-      <th scope="col">Manage</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%users.forEach(function(user){%>
-    <tr>
-      <th scope="row">
-        <%=user.id%>
-      </th>
-      <td>
-        <%=user.name%>
-      </td>
-      <td>
-        <%=user.password%>
-      </td>
-      <td>
-        <%=user.position%>
-      </td>
-      <%if(user.numberBranch){%>
-      <td>
-        <%=user.numberBranch%>
-      </td>
-      <%}else{%>
-      <td></td>
-      <% } %>
-      <%if(position==='manager'){%>
-      <td>
-        <button onclick="updateUser('<%=user.name%>')" class="btn btn-primary m-2">Update</button>
-        <button onclick="deleteUser('<%=user.name%>')" class="btn btn-danger m-2">Delete</button>
-      </td>
-      <%}else{%>
-      <td></td>
-      <%}%>
-    </tr>
-    <%})%>
-  </tbody>
-</table>
-<button class="btn btn-primary" onclick="addUser()">Add user</button>
+<div class="jumbotron">
+  <div class="d-flex align-items-center">
+    <strong id="loadText">Loading...</strong>
+    <div id="loadIcon" class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+  </div>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Password</th>
+        <th scope="col">Role</th>
+        <th scope="col">branch</th>
+        <th scope="col">Manage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%users.forEach(function(user){%>
+      <tr>
+        <th scope="row">
+          <%=user.id%>
+        </th>
+        <td>
+          <%=user.name%>
+        </td>
+        <td>
+          <%=user.password%>
+        </td>
+        <td>
+          <%=user.position%>
+        </td>
+        <%if(user.numberBranch){%>
+        <td>
+          <%=user.numberBranch%>
+        </td>
+        <%}else{%>
+        <td></td>
+        <% } %>
+        <%if(position==='manager'){%>
+        <td>
+          <button onclick="updateUser('<%=user.name%>')" class="btn btn-primary m-2">Update</button>
+          <button onclick="deleteUser('<%=user.name%>')" class="btn btn-danger m-2">Delete</button>
+        </td>
+        <%}else{%>
+        <td></td>
+        <%}%>
+      </tr>
+      <%})%>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" onclick="addUser()">Add user</button>
+  <button class="btn btn-primary" onclick="reload()">Reload</button>
+</div>
 <script>
+  $(document).ready(() => {
+    $('#loadIcon').hide();
+    $('#loadText').hide();
+  })
+
+
+
   function updateUser(username) {
     $('#body').load(`./updateForm?username=${this_username}&userToUpdate=${username}`);
   }
@@ -54,13 +68,21 @@
     $('#body').load(`./addUser?username=${this_username}`);
   }
 
+  function reload() {
+    const body = wait();
+    setTimeout(() => {
+      release(body, `./users?username=${this_username}`)
+    }, 1000);
+  }
+
   function deleteUser(username) {
+    const body = wait();
     fetch(`/deleteUser?username=${this_username}&userToDelete=${username}`, {
       method: 'DELETE'
     }).then(res => {
       if (res.status === 200)
         alert(`${username} deleted successfully`);
+      release(body, `./users?username=${this_username}`)
     })
-    $('#body').load(`./users?username=${this_username}`);
   }
 </script>

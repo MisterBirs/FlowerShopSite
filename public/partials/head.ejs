@@ -46,4 +46,20 @@
   $('#catalog').hide();
   $('#branches').hide();
   $('#users').hide();
+
+  function release(body, loadParams) {
+    if (body === $('#body').html()) {
+      $('#body').load(loadParams);
+      $('#loadIcon').hide();
+      $('#loadText').hide();
+      $('.btn-primary,td>.btn,.nav-link').prop('disabled', false);
+    }
+  }
+
+  function wait() {
+    $('#loadIcon').show();
+    $('#loadText').show();
+    $('.btn-primary,td>.btn,.nav-link').prop('disabled', true);
+    return $('#body').html();
+  }
 </script>

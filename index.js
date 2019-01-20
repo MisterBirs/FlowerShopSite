@@ -72,20 +72,22 @@ app.put("/addUser", (req, res) => {
     let newUser = usersData.users.find(user => {
       return user.name === userToAdd;
     });
-    if (newUser) {
-      res.status(501).json("Username already exist!");
-    } else {
-      let newUser = {};
-      newUser.name = userToAdd;
-      newUser.password = password;
-      newUser.position = position;
-      newUser.numberBranch = branch;
-      newUser.id = ID;
-      newUser.active = "true";
-      console.log(newUser);
-      usersData.users.push(newUser);
-      res.json(`${newUser.name} added successfully`);
-    }
+    setTimeout(() => {
+      if (newUser) {
+        res.status(501).json("Username already exist!");
+      } else {
+        let newUser = {};
+        newUser.name = userToAdd;
+        newUser.password = password;
+        newUser.position = position;
+        newUser.numberBranch = branch;
+        newUser.id = ID;
+        newUser.active = "true";
+        console.log(newUser);
+        usersData.users.push(newUser);
+        res.json(`${newUser.name} added successfully`);
+      }
+    }, 1000);
   } else {
     res.status(501).json("You are not a worker");
   }
@@ -102,16 +104,6 @@ app.get("/auth/:username", (req, res) => {
     userToSend.password = "*******";
     res.json(userToSend);
     // res.send(users[username]);
-  }
-});
-
-app.get("/manage/:username", (req, res) => {
-  const { username } = req.params;
-  const user = usersData.users.find(user => {
-    return user.name === username;
-  });
-  if (user && user.position === "manager") {
-    //res.render("../public/partials/manage");
   }
 });
 
@@ -172,17 +164,19 @@ app.delete("/deleteUser", (req, res) => {
   const user = usersData.users.find(user => {
     return user.name === username;
   });
-  if (user.position == "manager") {
-    usersData.users = usersData.users.map(user => {
-      if (user.name == userToDelete) {
-        user.active = "false";
-      }
-      return user;
-    });
-    res.json(`${userToDelete} deleted successfully`);
-  } else {
-    res.status(500).json("Not a manager");
-  }
+  setTimeout(() => {
+    if (user.position == "manager") {
+      usersData.users = usersData.users.map(user => {
+        if (user.name == userToDelete) {
+          user.active = "false";
+        }
+        return user;
+      });
+      res.json(`${userToDelete} deleted successfully`);
+    } else {
+      res.status(500).json("Not a manager");
+    }
+  }, 1000);
 });
 
 app.put("/mUpdate", (req, res) => {
@@ -197,20 +191,22 @@ app.put("/mUpdate", (req, res) => {
   const user = usersData.users.find(user => {
     return user.name === username;
   });
-  if (user.position == "manager") {
-    usersData.users = usersData.users.map(user => {
-      if (user.name == userToUpdate) {
-        user.name = newUsername;
-        user.password = newPassword;
-        user.position = newPosition;
-        user.numberBranch = newBranch ? newBranch : "";
-      }
-      return user;
-    });
-    res.json(`${userToUpdate} update successfully`);
-  } else {
-    res.status(500).json("Not a manager");
-  }
+  setTimeout(() => {
+    if (user.position == "manager") {
+      usersData.users = usersData.users.map(user => {
+        if (user.name == userToUpdate) {
+          user.name = newUsername;
+          user.password = newPassword;
+          user.position = newPosition;
+          user.numberBranch = newBranch ? newBranch : "";
+        }
+        return user;
+      });
+      res.json(`${userToUpdate} update successfully`);
+    } else {
+      res.status(500).json("Not a manager");
+    }
+  }, 1000);
 });
 
 app.get("/catalog", (req, res) => {

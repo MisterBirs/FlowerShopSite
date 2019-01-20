@@ -32,15 +32,15 @@
         password = $('#password').val();
         role = $('#role').val();
         branchNumber = $('#branchNumber').val();
+        const body = wait();
         fetch(
             `/mUpdate?username=${this_username}&userToUpdate=<%=user.name%>&newUsername=${username}&newPassword=${password}&newPosition=${role}&newBranch=${branchNumber}`, {
                 method: 'PUT'
             }).then((res) => {
             res.json().then(json => {
                 alert(json);
+                release(body, `./users?username=${this_username}`);
             })
-
         })
-        $('#body').load(`./users?username=${this_username}`);
     }
 </script>

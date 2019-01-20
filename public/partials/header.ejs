@@ -125,7 +125,7 @@
             if (user.position === 'manager')
               $('#branches').show();
           }
-          if (user.position === 'customer') {
+          if (user.position === 'customer' || user.position === 'supplier') {
             $('#catalog').show();
           }
         })

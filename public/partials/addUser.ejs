@@ -30,16 +30,17 @@
         id = $('#userID').val();
         role = $('#role').val();
         branchNumber = $('#branchNumber').val();
+        const body = wait();
         fetch(
             `/addUser?username=${this_username}&userToAdd=${username}&password=${password}&position=${role}&branch=${branchNumber}&ID=${id}`, {
                 method: 'PUT'
             }).then((res) => {
             res.json().then(json => {
                 alert(json);
-                $('#body').load(`./users?username=${this_username}`);
+                release(body, `./users?username=${this_username}`)
             }).catch((reason) => {
                 alert(reason);
-                $('#body').load('./addUser');
+                release(body, `./addUser?username=${this_username}`)
             });
         })
     }
