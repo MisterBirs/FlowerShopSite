@@ -31,26 +31,36 @@
       <%}else{%>
       <td></td>
       <% } %>
+      <%if(position==='manager'){%>
       <td>
         <button onclick="updateUser('<%=user.name%>')" class="btn btn-primary m-2">Update</button>
         <button onclick="deleteUser('<%=user.name%>')" class="btn btn-danger m-2">Delete</button>
       </td>
+      <%}else{%>
+      <td></td>
+      <%}%>
     </tr>
     <%})%>
   </tbody>
 </table>
-<button class="btn btn-primary" onclick="addUser">Add user</button>
+<button class="btn btn-primary" onclick="addUser()">Add user</button>
 <script>
   function updateUser(username) {
-    alert(`${username} updated`);
     $('#body').load(`./updateForm?username=${this_username}&userToUpdate=${username}`);
   }
 
   function addUser() {
-    alert(`user added`);
+    console.log('clicked' + this_username);
+    $('#body').load(`./addUser?username=${this_username}`);
   }
 
   function deleteUser(username) {
-    alert(`${username} deleted`);
+    fetch(`/deleteUser?username=${this_username}&userToDelete=${username}`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (res.status === 200)
+        alert(`${username} deleted successfully`);
+    })
+    $('#body').load(`./users?username=${this_username}`);
   }
 </script>

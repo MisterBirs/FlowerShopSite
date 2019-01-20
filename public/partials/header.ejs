@@ -87,7 +87,11 @@
       });
       $('#users').click(() => {
         $('#body').load(`./users?username=${this_username}`);
-      })
+      });
+      $('#about').click(() => {
+        $('#body').load(`./about`);
+
+      });
     });
   </script>
   <script>
@@ -98,6 +102,8 @@
       $('#users').hide();
       $('#branches').hide();
       $('#loginBtn').show();
+      $('#body').load('./about');
+      this_username = '';
     }
 
     function changeViewAfterLogin(username) {
