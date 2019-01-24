@@ -1,0 +1,26 @@
+{
+    "branches": [
+      {
+        "branch_number": 1,
+        "phone": "0542183746",
+        "number_of_employees": 1,  
+        "manager": "matanya",
+        "active": "true"
+      },
+      {
+        "branch_number": 2,
+        "phone": "0542183747",
+        "number_of_employees": 2,  
+        "manager": "matanya",
+        "active": "true"
+      },
+      {
+        "branch_number": 3,
+        "phone": "0542183748",
+        "number_of_employees": 0,  
+        "manager": "none",
+        "active": "false"
+      }
+   
+    ]
+  }
