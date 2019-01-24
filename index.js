@@ -8,7 +8,7 @@ let catalogData = require("./public/flower.json");
 const ejsLint = require("ejs-lint");
 const us = require("./public/partials/users.ejs");
 
-//ejsLint(us);
+let contactUsData = [];
 
 function filterData(jsonList) {
   return jsonList.filter(element => {
@@ -19,6 +19,18 @@ function filterData(jsonList) {
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
+
+app.get("/contactUs", (req, res) => {}); //Shlomi
+
+app.post("/contactUs", (req, res) => {
+  //Shlomi
+  const { email, message } = req.body;
+  contactUsData.push({
+    email: email,
+    messgae: message,
+    time: Date.now()
+  });
+});
 
 app.get("/", (req, res) => {
   res.render("../public/index.ejs");
