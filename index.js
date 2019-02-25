@@ -20,16 +20,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
 
-app.get("/contactUs", (req, res) => {}); //Shlomi
+app.get("/contactUs", (req, res) => {
+  res.render("../public/partials/contactUs");
+});
 
 app.post("/contactUs", (req, res) => {
-  //Shlomi
-  const { email, message } = req.body;
-  contactUsData.push({
-    email: email,
-    messgae: message,
-    time: Date.now()
-  });
+  const { email, name, text } = req.body;
+  //console.log(email + " " + name + " " + text);
+  res.send();
 });
 
 app.get("/", (req, res) => {

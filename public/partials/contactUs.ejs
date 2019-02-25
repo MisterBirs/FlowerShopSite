@@ -1,0 +1,44 @@
+<div>
+    <h3>Contact Us</h3>
+
+    <div class="container">
+        <script>
+            function sendContactData() {
+                const url = `./contactUs`;
+                const jsonData = {
+                    email: $('#contactEmail').val(),
+                    name: $('#contactName').val(),
+                    text: $('#contactText').val()
+        };
+      const fetchData = {
+        method: 'POST',
+        body:JSON.stringify(jsonData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+      fetch(url,fetchData).then((res)=>{
+          if(res.status==200){
+              alert('Data sent\nThank you for contact us!');
+              $('#body').load('./about');
+          }
+      })
+            }
+            </script>
+        <form>
+            <div class="form-group">
+                <label for="contactEmail">Email address</label>
+                <input type="email" class="form-control" id="contactEmail" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="contactName">Name</label>
+                <input type="text" class="form-control" id="contactName" placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label for="contactText">Write your text here...</label>
+                <textarea class="form-control" id="contactText" rows="3"></textarea>
+            </div>
+            <button type="button" onclick="sendContactData()" id="contactSubmit" class="btn btn-primary sm2">Submit</button>
+        </form>
+    </div>
+</div>
