@@ -4,9 +4,41 @@ var express = require("express");
 var ejs = require("ejs");
 var app = express();
 let usersData = require("./public/users.json");
+const users = require("./routes/users");
 let catalogData = require("./public/flower.json");
 const ejsLint = require("ejs-lint");
 const us = require("./public/partials/users.ejs");
+const mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://localhost/flower_shop")
+  .then(() => console.log("connected to MongoDB"))
+  .catch(err => console.error("Could not connect to MongoDB...", err));
+
+app.use("/api/users", users);
+
+async function createUser(name, password, position, id, active, numberBranch) {
+  if (numberBranch === undefined) numberBranch = null;
+  const user = new User({
+    name: name,
+    password: password,
+    position: position,
+    id: id,
+    active: active,
+    numberBranch: numberBranch
+  });
+
+  const result = await user.save();
+  console.log(result);
+}
+
+usersData.users.forEach(user => {
+  const { name, password, position, id, active, numberBranch } = user;
+  createUser(name, password, position, id, active, numberBranch);
+  // console.log(name, password, position, id, active, numberBranch);
+});
+
+//createUser();
 
 let contactUsData = [];
 
