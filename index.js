@@ -4,10 +4,9 @@ var express = require("express");
 var ejs = require("ejs");
 var app = express();
 let usersData = require("./public/users.json");
-const users = require("./routes/users");
 let catalogData = require("./public/flower.json");
+const api = require("./routes/api");
 const ejsLint = require("ejs-lint");
-const us = require("./public/partials/users.ejs");
 const mongoose = require("mongoose");
 
 mongoose
@@ -15,42 +14,20 @@ mongoose
   .then(() => console.log("connected to MongoDB"))
   .catch(err => console.error("Could not connect to MongoDB...", err));
 
-app.use("/api/users", users);
-
-async function createUser(name, password, position, id, active, numberBranch) {
-  if (numberBranch === undefined) numberBranch = null;
-  const user = new User({
-    name: name,
-    password: password,
-    position: position,
-    id: id,
-    active: active,
-    numberBranch: numberBranch
-  });
-
-  const result = await user.save();
-  console.log(result);
-}
-
-usersData.users.forEach(user => {
-  const { name, password, position, id, active, numberBranch } = user;
-  createUser(name, password, position, id, active, numberBranch);
-  // console.log(name, password, position, id, active, numberBranch);
-});
-
-//createUser();
-
-let contactUsData = [];
-
-function filterData(jsonList) {
-  return jsonList.filter(element => {
-    return element.active == "true";
-  });
-}
+// function filterData(jsonList) {
+//   return jsonList.filter(element => {
+//     return element.active == "true";
+//   });
+// }
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
+app.use("/api", api);
+
+app.get("/", (req, res) => {
+  res.render("../public/index.ejs");
+});
 
 app.get("/contactUs", (req, res) => {
   res.render("../public/partials/contactUs");
@@ -62,37 +39,12 @@ app.post("/contactUs", (req, res) => {
   res.send();
 });
 
-app.get("/", (req, res) => {
-  res.render("../public/index.ejs");
+app.get("/logout", (req, res) => {
+  res.send();
 });
 
-app.post("/auth", (req, res) => {
-  const { username, password } = req.body;
-  const user = usersData.users.find(user => {
-    return user.name === username;
-  });
-  // console.log(username);
-  //console.log(user);
-  // console.log(usersData);
-  if (user && user.password === password) {
-    res.send();
-  } else {
-    res.status(500).send("Authentication Error");
-  }
-});
-
-app.post("/auth/:username", (req, res) => {
-  const { username } = req.params;
-  console.log(username);
-  const user = usersData.users.find(user => {
-    return user.name === username;
-  });
-  if (user) {
-    let userToSend = { ...user };
-    userToSend.password = "*******";
-    res.json(userToSend);
-    // res.send(users[username]);
-  }
+app.get("/about", (req, res) => {
+  res.render(`../public/partials/about`);
 });
 
 app.get("/addUser", (req, res) => {
@@ -133,51 +85,6 @@ app.put("/addUser", (req, res) => {
   } else {
     res.status(501).json("You are not a worker");
   }
-});
-
-app.get("/auth/:username", (req, res) => {
-  const { username } = req.params;
-  //console.log(username);
-  const user = usersData.users.find(user => {
-    return user.name === username;
-  });
-  if (user) {
-    let userToSend = { ...user };
-    userToSend.password = "*******";
-    res.json(userToSend);
-    // res.send(users[username]);
-  }
-});
-
-app.get("/logout/", (req, res) => {
-  res.send();
-});
-
-app.get("/users", (req, res) => {
-  const { username } = req.query;
-  const user = usersData.users.find(user => {
-    return user.name === username;
-  });
-  if (user && (user.position === "manager" || user.position === "worker")) {
-    let usersList = [];
-    if (user.position === "manager") {
-      usersList = filterData(usersData.users);
-    }
-    if (user.position === "worker") {
-      usersList = filterData(usersData.users).map(user => {
-        user.password = "*********";
-        return user;
-      });
-    }
-    res.render("../public/partials/users", {
-      users: usersList,
-      position: user.position
-    });
-  }
-});
-
-app.get("/about", (req, res) => {
-  res.render(`../public/partials/about`);
 });
 
 app.get("/updateForm", (req, res) => {
