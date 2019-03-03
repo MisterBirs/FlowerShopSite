@@ -3,8 +3,15 @@ const router = express.Router();
 const Flower = require("../model/flowers");
 
 router.get("/", async (req, res) => {
-  const floweres = await Flower.find({ active: true }).sort("name");
-  res.send(floweres);
+  const flowers = await Flower.find({ active: true }).sort("name");
+  res.send(flowers);
+});
+
+app.get("/catalog", async (req, res) => {
+  const flowers = await Flower.find({ active: true }).sort("name");
+  res.render("../public/partials/catalog", {
+    flowers: flowers
+  });
 });
 
 router.post("/", async (req, res) => {

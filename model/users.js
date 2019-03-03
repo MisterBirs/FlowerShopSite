@@ -19,12 +19,16 @@ const userSchema = new mongoose.Schema({
     enum: ["manager", "worker", "supplier", "customer"],
     lowercase: true
   },
-  numberBranch: { type: Number, min: 1 },
-  active: {
-    type: Boolean,
+  numberBranch: {
+    type: Number,
+    min: 1,
     required: function() {
       return this.position === "worker";
     }
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 
