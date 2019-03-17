@@ -3,12 +3,11 @@ var bodyParser = require("body-parser");
 var express = require("express");
 var ejs = require("ejs");
 var app = express();
-let usersData = require("./public/users.json");
-let catalogData = require("./public/flower.json");
 const api = require("./routes/api");
 const ejsLint = require("ejs-lint");
 const mongoose = require("mongoose");
-
+const User = require("./model/users");
+const auth = require("./routes/auth");
 mongoose
   .connect("mongodb://localhost/flower_shop")
   .then(() => console.log("connected to MongoDB"))
@@ -24,13 +23,19 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use("/api", api);
+app.use("/auth", auth);
+
+// app.get("/use", async (req, res) => {
+//   let abc = await User.find({ name: "matanya" });
+//   res.json(abc);
+// });
 
 app.get("/", (req, res) => {
   res.render("../public/index.ejs");
 });
 
 app.get("/contactUs", (req, res) => {
-  res.render("../public/partials/contactUs");
+  res.render("../views/contactUs");
 });
 
 app.post("/contactUs", (req, res) => {
@@ -44,7 +49,7 @@ app.get("/logout", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.render(`../public/partials/about`);
+  res.render(`../views/about`);
 });
 
 app.listen(3000, function() {

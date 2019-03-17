@@ -1,0 +1,47 @@
+</div>
+<div class="jumbotron">
+  <h1>Catalog</h1>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Color</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%  flowers.forEach(function(flower){ %>
+      <tr>
+        <td class="align-middle">
+          <%=flower._id%>
+        </td>
+        <td>
+          <img class="card-img-top" style="width: 150px" src=<%=flower.image%> alt=
+          <%=flower.name%>></img></td>
+        <td class="align-middle">
+          <h6 class="card-title">
+            <%=flower.name%>
+          </h6>
+        </td>
+        <td class="align-middle">
+          <%=flower.color%>
+        </td>
+        <td class="align-middle">
+          <%=flower.price+"$"%>
+        </td>
+      </tr>
+      <%})%>
+    </tbody>
+  </table>
+  <% if(user.position==='manager'||user.position==='supplier') { %>
+  <button class="btn btn-primary" onclick="addFlower()" type="button">Add Flower</button>
+  <% } %>
+  <script>
+    function addFlower() {
+      console.log('flower upload clicked ' + this_username);
+      $('#body').load(`/api/flowers/upload?username=${this_username}`);
+    }
+  </script>
+</div>

@@ -10,9 +10,9 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { id, numberOfEmployees, manager, phone, active } = req.body;
-  const { error } = validateBranch(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  const { id, numberOfEmployees, manager, phone, active } = req.query;
+  // const { error } = validateBranch(req.query);
+  // if (error) return res.status(400).send(error.details[0].message);
   const isBranch = await Branch.find({ branchNumber: id });
   if (isBranch) {
     return res.status(500).send("The branch with the given ID already exists");
@@ -36,9 +36,9 @@ router.get("/:id", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const { id, numberOfEmployees, manager, phone, active } = req.body;
-  const { error } = validateBranch(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  const { id, numberOfEmployees, manager, phone, active } = req.query;
+  // const { error } = validateBranch(req.query);
+  // if (error) return res.status(400).send(error.details[0].message);
   const branch = await Branch.findByIdAndUpdate(
     req.param.id,
     {
@@ -67,3 +67,5 @@ router.delete("/:id", async (req, res) => {
     return res.status(404).send("The branch with the given ID does not exist");
   res.send(branch);
 });
+
+module.exports = router;

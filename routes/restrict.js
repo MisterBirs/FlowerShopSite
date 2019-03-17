@@ -1,8 +1,8 @@
 const express = require("express");
-const users = require("./users");
+const User = require("../model/users");
 
 module.exports = function(req, res, next) {
-  users.find({ name: req.query }).exec(function(error, user) {
+  User.find({ name: req.query.username }).exec(function(error, user) {
     if (error) {
       return next(error);
     } else {

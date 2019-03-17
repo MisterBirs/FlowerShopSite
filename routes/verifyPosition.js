@@ -1,11 +1,11 @@
-const users = require("./users");
+const users = require("../model/users");
 
 module.exports = function(req, res, next) {
-  users.find({ name: req.query }).exec(function(error, user) {
+  users.findOne({ name: req.query.username }).exec(function(error, user) {
     if (error) {
       return next(error);
     } else {
-      if (user === null) {
+      if (!user) {
         var err = new Error("Not authorized! Go back!");
         err.status = 400;
         return next(err);

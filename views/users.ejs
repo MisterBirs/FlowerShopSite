@@ -1,0 +1,91 @@
+<div class="jumbotron">
+  <div class="d-flex align-items-top">
+    <strong id="loadText">Loading...</strong>
+    <div id="loadIcon" class="spinner-border" role="status" aria-hidden="true"></div>
+  </div>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Password</th>
+        <th scope="col">Role</th>
+        <th scope="col">branch</th>
+        <th scope="col">Manage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%users.forEach(function(user){%>
+      <tr>
+        <th scope="row">
+          <%=user._id%>
+        </th>
+        <td>
+          <%=user.name%>
+        </td>
+        <td>
+          <%=user.password%>
+        </td>
+        <td>
+          <%=user.position%>
+        </td>
+        <%if(user.numberBranch){%>
+        <td>
+          <%=user.numberBranch%>
+        </td>
+        <%}else{%>
+        <td></td>
+        <% } %>
+        <%if(position==='manager'){%>
+        <td>
+          <button onclick="updateUser('<%=user._id%>')" class="btn btn-primary m-2">Update</button>
+          <button onclick="deleteUser('<%=user._id%>')" class="btn btn-danger m-2">Delete</button>
+        </td>
+        <%}else{%>
+        <td></td>
+        <%}%>
+      </tr>
+      <%})%>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" onclick="addUser()">Add user</button>
+  <button class="btn btn-primary" onclick="reload()">Reload</button>
+</div>
+<script>
+  $(document).ready(() => {
+    $('#loadIcon').hide();
+    $('#loadText').hide();
+  });
+
+
+
+  function updateUser(_id) {
+    // console.log(_id);
+    $('#body').load(`/api/users/update?username=${this_username}&_id=${_id}`);
+  }
+
+  function addUser() {
+    console.log('clicked' + this_username);
+    $('#body').load(`/api/users/add?username=${this_username}`);
+  }
+
+  function reload() {
+    const body = wait();
+    setTimeout(() => {
+      release(body, `/api/users?username=${this_username}`)
+    }, 1000);
+  }
+
+  function deleteUser(_id) {
+    const body = wait();
+    fetch(`/api/users/${_id}?username=${this_username}`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (res.status === 200)
+        res.json().then(user => {
+          alert(`${user.name} deleted successfully`);
+        });
+      release(body, `/api/users?username=${this_username}`);
+    });
+  }
+</script>

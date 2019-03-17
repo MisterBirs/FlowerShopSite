@@ -9,7 +9,7 @@ const flowerSchema = new mongoose.Schema({
     unique: true
   },
   price: { type: Number, required: true, min: 0 },
-  image: { type: String, data: Buffer },
+  image: { type: String, required: true },
   color: {
     type: String,
     enum: [
@@ -38,4 +38,4 @@ const flowerSchema = new mongoose.Schema({
 
 const Flower = mongoose.model("Flower", flowerSchema);
 
-exports.Flower = Flower;
+module.exports = Flower;

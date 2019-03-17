@@ -1,0 +1,60 @@
+<div class="jumbotron">
+    <div class="align-items-top">
+        <strong id="loadText">Loading...</strong>
+        <div id="loadIcon" class="spinner-border" role="status" aria-hidden="true"></div>
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" value="<%=user.name%>" aria-describedby="emailHelp"
+                    placeholder="<%=user.name%>">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" value="<%=user.password%>" placeholder="Password"
+                    placeholder="<%=user.password%>">
+            </div>
+            <div class="form-group">
+                <label for="userID">ID</label>
+                <input type="text" readonly class="form-control" id="userID" disabled value="<%=user._id%>"
+                    aria-describedby="emailHelp" placeholder="<%=user.id%>">
+            </div>
+            <div class="form-group">
+                <label for="branchNumber">Branch #</label>
+                <input type="text" class="form-control" id="branchNumber" value="<%=user.numberBranch%>"
+                    aria-describedby="emailHelp" placeholder="<%=user.numberBranch%>">
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <input type="text" class="form-control" id="role" value="<%=user.position%>" aria-describedby="emailHelp"
+                    placeholder="<%=user.position%>">
+            </div>
+            <button type="button" onclick="update('<%user.name%>')" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    <script>
+        $(document).ready(() => {
+            $('#loadIcon').hide();
+            $('#loadText').hide();
+        });
+
+        function update(username) {
+            _id = $('#userID').val();
+            username = $('#username').val();
+            password = $('#password').val();
+            role = $('#role').val();
+            branchNumber = $('#branchNumber').val();
+            const body = wait();
+            fetch(
+                `/api/users/${_id}?username=${this_username}&name=${username}&password=${password}&position=${role}&numberBranch=${branchNumber}`, {
+                    method: 'PUT'
+                }).then((res) => {
+                res.json().then(user => {
+                    alert(`${user.name} was update successfully`);
+                    release(body, `/api/users?username=${this_username}`);
+                });
+            }).catch(err => {
+                alert(err);
+                release(body, `/api/users/update?username=${this_username}&_id=${_id}`);
+            });
+        }
+    </script>
